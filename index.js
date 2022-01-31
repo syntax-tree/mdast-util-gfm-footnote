@@ -13,6 +13,7 @@ import {association} from 'mdast-util-to-markdown/lib/util/association.js'
 import {containerFlow} from 'mdast-util-to-markdown/lib/util/container-flow.js'
 import {indentLines} from 'mdast-util-to-markdown/lib/util/indent-lines.js'
 import {safe} from 'mdast-util-to-markdown/lib/util/safe.js'
+import {track} from 'mdast-util-to-markdown/lib/util/track.js'
 import {visit, EXIT} from 'unist-util-visit'
 
 let warningColonInFootnote = false
@@ -111,16 +112,22 @@ export function gfmFootnoteToMarkdown() {
    * @type {ToMarkdownHandle}
    * @param {FootnoteReference} node
    */
-  function footnoteReference(node, _, context) {
+  function footnoteReference(node, _, context, safeOptions) {
+    const tracker = track(safeOptions)
+    let value = tracker.move('[^')
     const exit = context.enter('footnoteReference')
     const subexit = context.enter('reference')
-    const reference = safe(context, association(node), {
-      before: '^',
-      after: ']'
-    })
+    value += tracker.move(
+      safe(context, association(node), {
+        ...tracker.current(),
+        before: value,
+        after: ']'
+      })
+    )
     subexit()
     exit()
-    return '[^' + reference + ']'
+    value += tracker.move(']')
+    return value
   }
 
   /** @type {ToMarkdownHandle} */
@@ -132,13 +139,25 @@ export function gfmFootnoteToMarkdown() {
    * @type {ToMarkdownHandle}
    * @param {FootnoteDefinition} node
    */
-  function footnoteDefinition(node, _, context) {
+  function footnoteDefinition(node, _, context, safeOptions) {
+    const tracker = track(safeOptions)
+    let value = tracker.move('[^')
     const exit = context.enter('footnoteDefinition')
     const subexit = context.enter('label')
-    const id = safe(context, association(node), {before: '^', after: ']'})
-    const label = '[^' + id + ']:'
+    const id = safe(context, association(node), {
+      ...tracker.current(),
+      before: value,
+      after: ']'
+    })
+    value += tracker.move(id)
+    value += tracker.move(
+      ']:' + (node.children && node.children.length > 0 ? ' ' : '')
+    )
     subexit()
-    const value = indentLines(containerFlow(node, context), map)
+    tracker.shift(4)
+    value += tracker.move(
+      indentLines(containerFlow(node, context, tracker.current()), map)
+    )
     exit()
 
     if (!warningColonInFootnote && id.includes(':')) {
@@ -168,7 +187,7 @@ export function gfmFootnoteToMarkdown() {
         return (blank ? '' : '    ') + line
       }
 
-      return (blank ? label : label + ' ') + line
+      return line
     }
   }
 }
