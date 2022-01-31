@@ -269,32 +269,27 @@ test('mdast -> markdown', (t) => {
     'should escape what would otherwise be an footnote definition'
   )
 
-  const warn = console.warn
-  let called = 0
-
-  console.warn = () => {
-    called++
-  }
-
-  toMarkdown(
-    {type: 'footnoteDefinition', identifier: 'a:b', children: []},
-    {extensions: [gfmFootnoteToMarkdown()]}
+  t.deepEqual(
+    toMarkdown(
+      {type: 'footnoteDefinition', identifier: 'a:b', children: []},
+      {extensions: [gfmFootnoteToMarkdown()]}
+    ),
+    '[^a:b]:\n',
+    'should support colons in footnote definitions'
   )
 
-  t.equal(called, 1, 'should warn on colons in footnote identifiers')
-
-  toMarkdown(
-    {
-      type: 'footnoteDefinition',
-      identifier: 'a',
-      children: [{type: 'list', children: []}]
-    },
-    {extensions: [gfmFootnoteToMarkdown()]}
+  t.deepEqual(
+    toMarkdown(
+      {
+        type: 'footnoteDefinition',
+        identifier: 'a',
+        children: [{type: 'list', children: [{type: 'listItem', children: []}]}]
+      },
+      {extensions: [gfmFootnoteToMarkdown()]}
+    ),
+    '[^a]: *\n',
+    'should support lists in footnote definitions'
   )
-
-  t.equal(called, 2, 'should warn on lists in footnote definitions')
-
-  console.warn = warn
 
   t.end()
 })

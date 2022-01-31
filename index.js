@@ -14,10 +14,6 @@ import {containerFlow} from 'mdast-util-to-markdown/lib/util/container-flow.js'
 import {indentLines} from 'mdast-util-to-markdown/lib/util/indent-lines.js'
 import {safe} from 'mdast-util-to-markdown/lib/util/safe.js'
 import {track} from 'mdast-util-to-markdown/lib/util/track.js'
-import {visit, EXIT} from 'unist-util-visit'
-
-let warningColonInFootnote = false
-let warningListInFootnote = false
 
 /**
  * @returns {FromMarkdownExtension}
@@ -144,40 +140,22 @@ export function gfmFootnoteToMarkdown() {
     let value = tracker.move('[^')
     const exit = context.enter('footnoteDefinition')
     const subexit = context.enter('label')
-    const id = safe(context, association(node), {
-      ...tracker.current(),
-      before: value,
-      after: ']'
-    })
-    value += tracker.move(id)
+    value += tracker.move(
+      safe(context, association(node), {
+        ...tracker.current(),
+        before: value,
+        after: ']'
+      })
+    )
+    subexit()
     value += tracker.move(
       ']:' + (node.children && node.children.length > 0 ? ' ' : '')
     )
-    subexit()
     tracker.shift(4)
     value += tracker.move(
       indentLines(containerFlow(node, context, tracker.current()), map)
     )
     exit()
-
-    if (!warningColonInFootnote && id.includes(':')) {
-      console.warn(
-        '[mdast-util-gfm-footnote] Warning: Found a colon in footnote identifier `' +
-          id +
-          '`. GitHub currently crahes on colons in footnotes (see <https://github.com/github/cmark-gfm/issues/241> for more info)'
-      )
-      warningColonInFootnote = true
-    }
-
-    if (!warningListInFootnote) {
-      visit(node, 'list', () => {
-        console.warn(
-          '[mdast-util-gfm-footnote] Warning: Found a list in a footnote definition. GitHub currently crahes on lists in footnotes (see <https://github.com/github/cmark-gfm/issues/241> for more info)'
-        )
-        warningListInFootnote = true
-        return EXIT
-      })
-    }
 
     return value
 
