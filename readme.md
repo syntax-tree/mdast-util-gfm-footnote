@@ -47,7 +47,7 @@ When you are working with syntax trees and want all of GFM, use
 [`mdast-util-gfm`][mdast-util-gfm] instead.
 
 When working with `mdast-util-from-markdown`, you must combine this package with
-[`micromark-extension-gfm`][extension].
+[`micromark-extension-gfm-footnote`][extension].
 
 This utility does not handle how markdown is turned to HTML.
 That’s done by [`mdast-util-to-hast`][mdast-util-to-hast].
