@@ -4,8 +4,17 @@ import {fromMarkdown} from 'mdast-util-from-markdown'
 import {toMarkdown} from 'mdast-util-to-markdown'
 import {gfmFootnote} from 'micromark-extension-gfm-footnote'
 import {gfmFootnoteFromMarkdown, gfmFootnoteToMarkdown} from './index.js'
+import * as mod from './index.js'
 
-test('markdown -> mdast', () => {
+test('core', () => {
+  assert.deepEqual(
+    Object.keys(mod).sort(),
+    ['gfmFootnoteFromMarkdown', 'gfmFootnoteToMarkdown'],
+    'should expose the public api'
+  )
+})
+
+test('gfmFootnoteFromMarkdown', () => {
   assert.deepEqual(
     fromMarkdown('[^a]: b\nc\n\n    d', {
       extensions: [gfmFootnote()],
@@ -137,7 +146,7 @@ test('markdown -> mdast', () => {
   )
 })
 
-test('mdast -> markdown', () => {
+test('gfmFootnoteToMarkdown', () => {
   assert.deepEqual(
     toMarkdown(
       {type: 'footnoteReference', identifier: 'a'},
