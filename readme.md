@@ -190,7 +190,7 @@ If your content is not in English, you should configure that utility.
 
 ## Syntax
 
-See [Syntax in `micromark-extension-frontmatter`][syntax].
+See [Syntax in `micromark-extension-gfm-footnote`][syntax].
 
 ## Syntax tree
 
