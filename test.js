@@ -229,7 +229,7 @@ test('gfmFootnoteToMarkdown', () => {
       },
       {extensions: [gfmFootnoteToMarkdown()]}
     ),
-    '[^a]:     b\n',
+    '[^a]: ```\n    b\n    ```\n',
     'should serialize code in a footnote definition'
   )
 
@@ -246,7 +246,7 @@ test('gfmFootnoteToMarkdown', () => {
       },
       {extensions: [gfmFootnoteToMarkdown()]}
     ),
-    '[^a]: b\n\n        c\n',
+    '[^a]: b\n\n    ```\n    c\n    ```\n',
     'should serialize code as the 2nd child in a footnote definition'
   )
 
