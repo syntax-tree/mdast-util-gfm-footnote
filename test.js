@@ -3,14 +3,17 @@ import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
 import {toMarkdown} from 'mdast-util-to-markdown'
 import {gfmFootnote} from 'micromark-extension-gfm-footnote'
-import {gfmFootnoteFromMarkdown, gfmFootnoteToMarkdown} from './index.js'
+import {
+  gfmFootnoteFromMarkdown,
+  gfmFootnoteToMarkdown
+} from 'mdast-util-gfm-footnote'
 
 test('core', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), [
-      'gfmFootnoteFromMarkdown',
-      'gfmFootnoteToMarkdown'
-    ])
+    assert.deepEqual(
+      Object.keys(await import('mdast-util-gfm-footnote')).sort(),
+      ['gfmFootnoteFromMarkdown', 'gfmFootnoteToMarkdown']
+    )
   })
 })
 
