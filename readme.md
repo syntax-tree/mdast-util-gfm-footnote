@@ -94,9 +94,15 @@ In browsers with [`esm.sh`][esmsh]:
 Say our document `example.md` contains:
 
 ```markdown
-Hi![^1]
+In the Solar System, Mercury[^mercury] and Venus[^venus] have very small tilts.
 
-[^1]: big note
+[^mercury]:
+    **Mercury** is the first planet from the Sun and the smallest
+    in the Solar System.
+
+[^venus]:
+    **Venus** is the second planet from
+    the Sun.
 ```
 
 …and our module `example.js` looks as follows:
@@ -104,22 +110,25 @@ Hi![^1]
 ```js
 import fs from 'node:fs/promises'
 import {fromMarkdown} from 'mdast-util-from-markdown'
+import {
+  gfmFootnoteFromMarkdown,
+  gfmFootnoteToMarkdown
+} from 'mdast-util-gfm-footnote'
 import {toMarkdown} from 'mdast-util-to-markdown'
 import {gfmFootnote} from 'micromark-extension-gfm-footnote'
-import {gfmFootnoteFromMarkdown, gfmFootnoteToMarkdown} from 'mdast-util-gfm-footnote'
 
-const doc = await fs.readFile('example.md')
+const value = await fs.readFile('example.md', 'utf8')
 
-const tree = fromMarkdown(doc, {
+const tree = fromMarkdown(value, {
   extensions: [gfmFootnote()],
   mdastExtensions: [gfmFootnoteFromMarkdown()]
 })
 
 console.log(tree)
 
-const out = toMarkdown(tree, {extensions: [gfmFootnoteToMarkdown()]})
+const result = toMarkdown(tree, {extensions: [gfmFootnoteToMarkdown()]})
 
-console.log(out)
+console.log(result)
 ```
 
 …now running `node example.js` yields (positional info removed for brevity):
@@ -131,16 +140,44 @@ console.log(out)
     {
       type: 'paragraph',
       children: [
-        {type: 'text', value: 'Hi!'},
-        {type: 'footnoteReference', identifier: '1', label: '1'}
+        {type: 'text', value: 'In the Solar System, Mercury'},
+        {type: 'footnoteReference', identifier: 'mercury', label: 'mercury'},
+        {type: 'text', value: ' and Venus'},
+        {type: 'footnoteReference', identifier: 'venus', label: 'venus'},
+        {type: 'text', value: ' have very small tilts.'}
       ]
     },
     {
       type: 'footnoteDefinition',
-      identifier: '1',
-      label: '1',
+      identifier: 'mercury',
+      label: 'mercury',
       children: [
-        {type: 'paragraph', children: [{type: 'text', value: 'big note'}]}
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'strong', children: [{type: 'text', value: 'Mercury'}]},
+            {
+              type: 'text',
+              value:
+                ' is the first planet from the Sun and the smallest\n' +
+                'in the Solar System.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      type: 'footnoteDefinition',
+      identifier: 'venus',
+      label: 'venus',
+      children: [
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'strong', children: [{type: 'text', value: 'Venus'}]},
+            {type: 'text', value: ' is the second planet from\nthe Sun.'}
+          ]
+        }
       ]
     }
   ]
@@ -148,9 +185,13 @@ console.log(out)
 ```
 
 ```markdown
-Hi\![^1]
+In the Solar System, Mercury[^mercury] and Venus[^venus] have very small tilts.
 
-[^1]: big note
+[^mercury]: **Mercury** is the first planet from the Sun and the smallest
+    in the Solar System.
+
+[^venus]: **Venus** is the second planet from
+    the Sun.
 ```
 
 ## API
