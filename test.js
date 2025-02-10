@@ -361,4 +361,37 @@ test('gfmFootnoteToMarkdown', async function (t) {
       )
     }
   )
+
+  await t.test('should support `firstLineBlank`', async function () {
+    assert.deepEqual(
+      toMarkdown(
+        {
+          type: 'footnoteDefinition',
+          identifier: 'a',
+          children: [
+            {type: 'paragraph', children: [{type: 'text', value: 'b'}]}
+          ]
+        },
+        {extensions: [gfmFootnoteToMarkdown({firstLineBlank: true})]}
+      ),
+      '[^a]:\n    b\n'
+    )
+  })
+
+  await t.test(
+    'should support `firstLineBlank` w/o children',
+    async function () {
+      assert.deepEqual(
+        toMarkdown(
+          {
+            type: 'footnoteDefinition',
+            identifier: 'a',
+            children: []
+          },
+          {extensions: [gfmFootnoteToMarkdown({firstLineBlank: true})]}
+        ),
+        '[^a]:\n'
+      )
+    }
+  )
 })

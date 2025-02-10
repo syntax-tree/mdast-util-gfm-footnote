@@ -18,7 +18,8 @@
 * [Use](#use)
 * [API](#api)
   * [`gfmFootnoteFromMarkdown()`](#gfmfootnotefrommarkdown)
-  * [`gfmFootnoteToMarkdown()`](#gfmfootnotetomarkdown)
+  * [`gfmFootnoteToMarkdown(options?)`](#gfmfootnotetomarkdownoptions)
+  * [`ToMarkdownOptions`](#tomarkdownoptions)
 * [HTML](#html)
 * [Syntax](#syntax)
 * [Syntax tree](#syntax-tree)
@@ -126,7 +127,9 @@ const tree = fromMarkdown(value, {
 
 console.log(tree)
 
-const result = toMarkdown(tree, {extensions: [gfmFootnoteToMarkdown()]})
+const result = toMarkdown(tree, {
+  extensions: [gfmFootnoteToMarkdown({firstLineBlank: true})]
+})
 
 console.log(result)
 ```
@@ -187,10 +190,12 @@ console.log(result)
 ```markdown
 In the Solar System, Mercury[^mercury] and Venus[^venus] have very small tilts.
 
-[^mercury]: **Mercury** is the first planet from the Sun and the smallest
+[^mercury]:
+    **Mercury** is the first planet from the Sun and the smallest
     in the Solar System.
 
-[^venus]: **Venus** is the second planet from
+[^venus]:
+    **Venus** is the second planet from
     the Sun.
 ```
 
@@ -200,6 +205,7 @@ This package exports the identifiers
 [`gfmFootnoteFromMarkdown`][api-gfmfootnotefrommarkdown] and
 [`gfmFootnoteToMarkdown`][api-gfmfootnotetomarkdown].
 There is no default export.
+It exports the type [`ToMarkdownOptions`][api-to-markdown-options].
 
 ### `gfmFootnoteFromMarkdown()`
 
@@ -212,16 +218,30 @@ to enable GFM footnotes in markdown.
 Extension for `mdast-util-from-markdown`
 ([`FromMarkdownExtension`][frommarkdownextension]).
 
-### `gfmFootnoteToMarkdown()`
+### `gfmFootnoteToMarkdown(options?)`
 
 Create an extension for
 [`mdast-util-to-markdown`][mdast-util-to-markdown]
 to enable GFM footnotes in markdown.
 
+###### Parameters
+
+* `options` ([`ToMarkdownOptions`][api-to-markdown-options], optional)
+  — configuration
+
 ###### Returns
 
 Extension for `mdast-util-to-markdown`
 ([`ToMarkdownExtension`][tomarkdownextension]).
+
+### `ToMarkdownOptions`
+
+Configuration (TypeScript type).
+
+###### Fields
+
+* `firstLineBlank` (`boolean`, default: `false`)
+  — use a blank line for the first line of footnote definitions
 
 ## HTML
 
@@ -381,7 +401,9 @@ abide by its terms.
 
 [api-gfmfootnotefrommarkdown]: #gfmfootnotefrommarkdown
 
-[api-gfmfootnotetomarkdown]: #gfmfootnotetomarkdown
+[api-gfmfootnotetomarkdown]: #gfmfootnotetomarkdownoptions
+
+[api-to-markdown-options]: #tomarkdownoptions
 
 [author]: https://wooorm.com
 
