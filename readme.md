@@ -12,23 +12,23 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When to use this](#when-to-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`gfmFootnoteFromMarkdown()`](#gfmfootnotefrommarkdown)
-    *   [`gfmFootnoteToMarkdown()`](#gfmfootnotetomarkdown)
-*   [HTML](#html)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-    *   [Nodes](#nodes)
-    *   [Content model](#content-model)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Related](#related)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When to use this](#when-to-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`gfmFootnoteFromMarkdown()`](#gfmfootnotefrommarkdown)
+  * [`gfmFootnoteToMarkdown()`](#gfmfootnotetomarkdown)
+* [HTML](#html)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+  * [Nodes](#nodes)
+  * [Content model](#content-model)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Related](#related)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -314,13 +314,13 @@ This means we try to keep the current release line,
 
 ## Related
 
-*   [`remark-gfm`][remark-gfm]
-    — remark plugin to support GFM
-*   [`mdast-util-gfm`][mdast-util-gfm]
-    — same but all of GFM (autolink literals, footnotes, strikethrough, tables,
-    tasklists)
-*   [`micromark-extension-gfm-footnote`][micromark-extension-gfm-footnote]
-    — micromark extension to parse GFM footnotes
+* [`remark-gfm`][remark-gfm]
+  — remark plugin to support GFM
+* [`mdast-util-gfm`][mdast-util-gfm]
+  — same but all of GFM (autolink literals, footnotes, strikethrough, tables,
+  tasklists)
+* [`micromark-extension-gfm-footnote`][micromark-extension-gfm-footnote]
+  — micromark extension to parse GFM footnotes
 
 ## Contribute
 
@@ -338,94 +338,94 @@ abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://github.com/syntax-tree/mdast-util-gfm-footnote/workflows/main/badge.svg
+[api-gfmfootnotefrommarkdown]: #gfmfootnotefrommarkdown
 
-[build]: https://github.com/syntax-tree/mdast-util-gfm-footnote/actions
-
-[coverage-badge]: https://img.shields.io/codecov/c/github/syntax-tree/mdast-util-gfm-footnote.svg
-
-[coverage]: https://codecov.io/github/syntax-tree/mdast-util-gfm-footnote
-
-[downloads-badge]: https://img.shields.io/npm/dm/mdast-util-gfm-footnote.svg
-
-[downloads]: https://www.npmjs.com/package/mdast-util-gfm-footnote
-
-[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=mdast-util-gfm-footnote
-
-[size]: https://bundlejs.com/?q=mdast-util-gfm-footnote
-
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
-
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
-
-[collective]: https://opencollective.com/unified
-
-[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
-
-[chat]: https://github.com/syntax-tree/unist/discussions
-
-[npm]: https://docs.npmjs.com/cli/install
-
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-
-[esmsh]: https://esm.sh
-
-[typescript]: https://www.typescriptlang.org
-
-[license]: license
+[api-gfmfootnotetomarkdown]: #gfmfootnotetomarkdown
 
 [author]: https://wooorm.com
 
-[health]: https://github.com/syntax-tree/.github
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
 
-[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
+[build]: https://github.com/syntax-tree/mdast-util-gfm-footnote/actions
 
-[support]: https://github.com/syntax-tree/.github/blob/main/support.md
+[build-badge]: https://github.com/syntax-tree/mdast-util-gfm-footnote/workflows/main/badge.svg
 
-[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
+[chat]: https://github.com/syntax-tree/unist/discussions
 
-[mdast]: https://github.com/syntax-tree/mdast
-
-[mdast-util-gfm]: https://github.com/syntax-tree/mdast-util-gfm
-
-[remark-gfm]: https://github.com/remarkjs/remark-gfm
-
-[micromark]: https://github.com/micromark/micromark
-
-[micromark-extension-gfm-footnote]: https://github.com/micromark/micromark-extension-gfm-footnote
-
-[syntax]: https://github.com/micromark/micromark-extension-gfm-footnote#syntax
-
-[gfm]: https://github.github.com/gfm/
+[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [cmark-gfm]: https://github.com/github/cmark-gfm
 
-[post]: https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/
+[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
 
-[mdast-util-from-markdown]: https://github.com/syntax-tree/mdast-util-from-markdown
+[collective]: https://opencollective.com/unified
 
-[mdast-util-to-markdown]: https://github.com/syntax-tree/mdast-util-to-markdown
+[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
 
-[mdast-util-to-hast]: https://github.com/syntax-tree/mdast-util-to-hast
+[coverage]: https://codecov.io/github/syntax-tree/mdast-util-gfm-footnote
 
-[dfn-parent]: https://github.com/syntax-tree/mdast#parent
+[coverage-badge]: https://img.shields.io/codecov/c/github/syntax-tree/mdast-util-gfm-footnote.svg
+
+[dfn-flow-content]: #flowcontent-gfm-footnotes
+
+[dfn-footnote-definition]: #footnotedefinition
+
+[dfn-footnote-reference]: #footnotereference
 
 [dfn-mxn-association]: https://github.com/syntax-tree/mdast#association
 
 [dfn-node]: https://github.com/syntax-tree/unist#node
 
-[frommarkdownextension]: https://github.com/syntax-tree/mdast-util-from-markdown#extension
-
-[tomarkdownextension]: https://github.com/syntax-tree/mdast-util-to-markdown#options
-
-[dfn-flow-content]: #flowcontent-gfm-footnotes
+[dfn-parent]: https://github.com/syntax-tree/mdast#parent
 
 [dfn-phrasing-content]: #phrasingcontent-gfm-footnotes
 
-[dfn-footnote-reference]: #footnotereference
+[downloads]: https://www.npmjs.com/package/mdast-util-gfm-footnote
 
-[dfn-footnote-definition]: #footnotedefinition
+[downloads-badge]: https://img.shields.io/npm/dm/mdast-util-gfm-footnote.svg
 
-[api-gfmfootnotefrommarkdown]: #gfmfootnotefrommarkdown
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
-[api-gfmfootnotetomarkdown]: #gfmfootnotetomarkdown
+[esmsh]: https://esm.sh
+
+[frommarkdownextension]: https://github.com/syntax-tree/mdast-util-from-markdown#extension
+
+[gfm]: https://github.github.com/gfm/
+
+[health]: https://github.com/syntax-tree/.github
+
+[license]: license
+
+[mdast]: https://github.com/syntax-tree/mdast
+
+[mdast-util-from-markdown]: https://github.com/syntax-tree/mdast-util-from-markdown
+
+[mdast-util-gfm]: https://github.com/syntax-tree/mdast-util-gfm
+
+[mdast-util-to-hast]: https://github.com/syntax-tree/mdast-util-to-hast
+
+[mdast-util-to-markdown]: https://github.com/syntax-tree/mdast-util-to-markdown
+
+[micromark]: https://github.com/micromark/micromark
+
+[micromark-extension-gfm-footnote]: https://github.com/micromark/micromark-extension-gfm-footnote
+
+[npm]: https://docs.npmjs.com/cli/install
+
+[post]: https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/
+
+[remark-gfm]: https://github.com/remarkjs/remark-gfm
+
+[size]: https://bundlejs.com/?q=mdast-util-gfm-footnote
+
+[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=mdast-util-gfm-footnote
+
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[support]: https://github.com/syntax-tree/.github/blob/main/support.md
+
+[syntax]: https://github.com/micromark/micromark-extension-gfm-footnote#syntax
+
+[tomarkdownextension]: https://github.com/syntax-tree/mdast-util-to-markdown#options
+
+[typescript]: https://www.typescriptlang.org
